@@ -6,6 +6,6 @@ exports.database = {
     user: process.env.user,
     name: process.env.database,
     password: process.env.password,
-    port: process.env.port,
+    port: process.env.ports,
     multipleStatements: process.env.multipleStatements
 };

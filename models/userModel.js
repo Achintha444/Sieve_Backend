@@ -4,7 +4,7 @@ const hashFunctions = require('../utils/hash_function');
 module.exports = class User {
     constructor(params) {
         this.id = params.common_user_id,
-            this.username = params.email,
+            this.email = params.email,
             this.password = params.password
     }
 

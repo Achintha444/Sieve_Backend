@@ -4,7 +4,7 @@ var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
 
-const User = require('./models/userModel');
+const ur = require('./controllers/userController');
 
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/userRoute');
@@ -20,6 +20,9 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
+
+app.use('/', indexRouter);
+app.use('/user', usersRouter);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
@@ -37,11 +40,8 @@ app.use(function(err, req, res, next) {
   res.render('error');
 });
 
-app.use('/', indexRouter);
-app.use('/user', usersRouter);
 
-app.listen('3000')
 
-User.getUserFromEmail('temp123@gmail.com').then((user)=>console.log(user));
+// ur.user_login();
 
 module.exports = app;
