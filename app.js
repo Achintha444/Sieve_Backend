@@ -4,7 +4,7 @@ var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
 
-//const h = require('./utils/hash_function')
+const User = require('./models/userModel');
 
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
@@ -39,5 +39,9 @@ app.use(function(err, req, res, next) {
   res.status(err.status || 500);
   res.render('error');
 });
+
+app.listen('3000')
+
+User.getUserFromEmail('temp123@gmail.com').then((user)=>console.log(user));
 
 module.exports = app;
