@@ -1,5 +1,6 @@
 const User = require('../models/userModel');
 const hashFunctions = require('../utils/hash_function');
+const validation = require('../utils/validation');
 
 exports.user_login2 = (req, res, next) => {
     const email = 'temp123@gmail.com';//req.body.email;
@@ -27,7 +28,6 @@ exports.user_login = (req, res, next) => {
             if (hashFunctions.checkHash(password, user.password)) {
                 console.log(user);
                 res.json({
-                    serverError: false,
                     email: user.email,
                     password: password
                 });
@@ -48,9 +48,14 @@ exports.user_login = (req, res, next) => {
 exports.user_signup = (req, res, next) => {
     const email = req.body.email;
     const password = req.body.password
-    User.insert(req.body).then(() => {
-        res.status(200).json({ success: true, serverError: false });
-    }).catch(() => {
-        res.status(404).json({ success: false, serverError: true })
-    });
+    if((validation.emailValidation(email))&&(validation.passwordValidation(password))){
+        User.insert(req.body).then(() => {
+            res.status(200).json({ success: true});
+        }).catch(() => {
+            res.status(404).json({serverError: true,error: 'Database Connection Faliure!' })
+        });
+    }else{
+        res.status(404).json({ serverError: false, error: 'Incorrect Email or Password' });
+    }
+
 }
