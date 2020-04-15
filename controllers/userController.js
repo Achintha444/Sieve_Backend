@@ -9,7 +9,7 @@ exports.user_login2 = (req, res, next) => {
             console.log(user);
             res.json({
                 email: user.email,
-                password : password
+                password: password
             });
         }
     }).catch((err) => {
@@ -27,19 +27,20 @@ exports.user_login = (req, res, next) => {
             if (hashFunctions.checkHash(password, user.password)) {
                 console.log(user);
                 res.json({
+                    serverError: false,
                     email: user.email,
                     password: password
                 });
             }
             else {
-                res.status(404).json({ error: 'Wrong Password' });
+                res.status(404).json({ serverError: false, error: 'Wrong Password' });
             }
-        } else{
-            res.status(404).json({ error: 'Wrong Password' });
+        } else {
+            res.status(404).json({ serverError: false, error: 'Wrong Email' });
         }
     }).catch((err) => {
         if (err) {
-            res.status(404).json({ error: 'Database Connection Faliure!' });
+            res.status(404).json({ serverError: true, error: 'Database Connection Faliure!' });
         }
     });
 }
@@ -47,9 +48,9 @@ exports.user_login = (req, res, next) => {
 exports.user_signup = (req, res, next) => {
     const email = req.body.email;
     const password = req.body.password
-    User.insert(req.body).then(()=>{
-        res.status(200).json({success: true});
-    }).catch(()=>{
-        res.status(404).json({success: false})
+    User.insert(req.body).then(() => {
+        res.status(200).json({ success: true, serverError: false });
+    }).catch(() => {
+        res.status(404).json({ success: false, serverError: true })
     });
 }
