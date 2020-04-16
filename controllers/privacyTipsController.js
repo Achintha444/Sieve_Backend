@@ -7,7 +7,7 @@ exports.view_all = (req, res, next) => {
         });
     };
     fetchPrivacyTips().then((tips)=>{
-        console.log (tips);
+        console.log (tips[0]);
         res.json({
             tips: tips
         });
