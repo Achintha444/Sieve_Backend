@@ -4,7 +4,7 @@ var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
 
-//const ur = require('./utils/hash_function');
+//const ur = require('./controllers/privacyTipsController');
 
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/userRoute');
@@ -42,6 +42,6 @@ app.use(function(err, req, res, next) {
 
 //console.log(ur.encrypt('Test@123'));
 
-// ur.user_login();
+ //ur.view_all();
 
 module.exports = app;
