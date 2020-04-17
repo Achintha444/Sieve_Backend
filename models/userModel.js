@@ -12,7 +12,7 @@ module.exports = class User {
         return new Promise((resolve) => {
             console.log(userInput);
             resolve(db.query("INSERT INTO tbl_common_user (common_user_id, email, password) VALUES (?,?,?)",
-                ["3",
+                ["5",
                 userInput.email,
                 hashFunctions.encrypt(userInput.password)]))
         }).catch((err) => {
