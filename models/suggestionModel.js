@@ -12,11 +12,11 @@ module.exports = class Suggestion {
         return new Promise((resolve) => {
             console.log(userInput);
             resolve(db.query("INSERT INTO tbl_suggestion (s_id, suggestion) VALUES (?,?)",
-                ["5",
+                ["8",
                     userInput.suggestion]));
             resolve(db.query("INSERT INTO tbl_common_user_suggestion (common_user_id, s_id) VALUES (?,?)",
                 [userInput.userId,
-                    "5"]));
+                    "8"]));
         }).catch((err) => {
             console.log(err);
         });
