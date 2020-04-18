@@ -28,6 +28,7 @@ exports.user_login = (req, res, next) => {
             if (hashFunctions.checkHash(password, user.password)) {
                 console.log(user);
                 res.json({
+                    id: user.id.toString(),
                     email: user.email,
                     password: password
                 });
