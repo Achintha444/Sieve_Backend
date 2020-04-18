@@ -1,15 +1,15 @@
-const PrivacyNews = require('../models/privacyNewsModel');
+const PrivacyLaws = require('../models/privacyLawsModel');
 
 exports.view_all = (req, res, next) => {
     const fetchPrivacyNews =  () => {
         return new Promise((resolve, reject) => {
-            resolve((PrivacyNews.getAllPrivacyNews()));
+            resolve((PrivacyLaws.getAllPrivacyLaws()));
         });
     };
-    fetchPrivacyNews().then((tips)=>{
-        console.log (tips[0]);
+    fetchPrivacyNews().then((laws)=>{
+        console.log (laws[0]);
         res.json({
-            news: news
+            laws: laws
         });
     }).catch((err) => {
         if (err) {

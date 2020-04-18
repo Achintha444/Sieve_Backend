@@ -9,7 +9,7 @@ var logger = require('morgan');
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/userRoute');
 var privacyTipsRoute = require('./routes/privacyTipsRoute');
-var privacyNewssRoute = require('./routes/privacyNewsRoute');
+var privacyLawsRoute = require('./routes/privacyLawsRoute');
 var suggestionRoute = require('./routes/suggestionRoute');
 
 var app = express();
@@ -27,7 +27,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use('/', indexRouter);
 app.use('/user', usersRouter);
 app.use('/privacy_tips',privacyTipsRoute);
-app.use('/privacy_newss',privacyNewssRoute);
+app.use('/privacy_laws',privacyLawsRoute);
 app.use('/suggestion',suggestionRoute);
 
 // catch 404 and forward to error handler
