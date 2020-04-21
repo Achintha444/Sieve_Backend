@@ -11,12 +11,31 @@ module.exports = class Suggestion {
     static insert(userInput) {
         return new Promise((resolve) => {
             console.log(userInput);
-            resolve(db.query("INSERT INTO tbl_suggestion (s_id, suggestion) VALUES (?,?)",
-                ["8",
+            resolve(db.query("INSERT INTO tbl_suggestion (suggestion) VALUES (?)",
+                [
                     userInput.suggestion]));
-            resolve(db.query("INSERT INTO tbl_common_user_suggestion (common_user_id, s_id) VALUES (?,?)",
-                [userInput.userId,
-                    "8"]));
+                    const fetchLastId = () => {
+                        return new Promise((resolve, reject) => {
+                            resolve((Suggestion.selectLastSug()));
+                        });
+                    };
+
+                    fetchLastId().then((result) => {
+                        console.log(result)
+                        resolve(db.query("INSERT INTO tbl_common_user_suggestion (common_user_id,s_id) VALUES (?,?)",
+                [userInput.userId,result[0].s_id]));
+                    });
+                    
+            
+        }).catch((err) => {
+            console.log(err);
+        });
+
+    }
+
+    static selectLastSug(){
+        return new Promise((resolve) => {
+            resolve(db.query("SELECT s_id from tbl_suggestion ORDER BY s_id DESC LIMIT 1"))
         }).catch((err) => {
             console.log(err);
         });
