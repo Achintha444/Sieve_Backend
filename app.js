@@ -11,6 +11,7 @@ var usersRouter = require('./routes/userRoute');
 var privacyTipsRoute = require('./routes/privacyTipsRoute');
 var privacyLawsRoute = require('./routes/privacyLawsRoute');
 var suggestionRoute = require('./routes/suggestionRoute');
+var interestingNewsRoute= require('./routes/interestingNews');
 
 var app = express();
 
@@ -29,6 +30,7 @@ app.use('/user', usersRouter);
 app.use('/privacy_tips',privacyTipsRoute);
 app.use('/privacy_laws',privacyLawsRoute);
 app.use('/suggestion',suggestionRoute);
+app.use('/interesting_news',interestingNewsRoute);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
